@@ -1,8 +1,11 @@
-var Human = Backbone.Model.extend({
-    initialize: function(){
-        alert("Welcome to this world");
-    }
-});
+window.SearchTree = window.SearchTree || {};
 
-var human = new Human({ name: "Thomas", age: 67});
+
+window.SearchTree.app =
+    $(document).ready(function(){
+        var input = new window.SearchTree.inputView();
+        window.SearchTree.instantiatedTreeView = new window.SearchTree.treeView({ model: window.SearchTree.instantiatedTreeModel });
+        window.SearchTree.instantiatedTreeView.render();
+    });
+
 
