@@ -10,7 +10,7 @@ window.SearchTree.inputView = Backbone.View.extend({
     dataView: window.SearchTree.fileData,
 
     events: {
-        'keyup #search-field': 'update'
+        'change input#search-field': 'update'
     },
 
     update: function(){

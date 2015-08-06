@@ -5,20 +5,21 @@ window.SearchTree = window.SearchTree || {};
 
 window.SearchTree.treeModel = Backbone.Model.extend({
 
+    result: [],
+
     filterTree: function(data, src){
         //console.log(src);
         var arrData = data;
-        var result = [];
         //console.log(arrData);
 
         for (var i =0; i< arrData.length; i++) {
             //var item = arrData[i];
             if (arrData[i].type === 'file' && src === '') {
-                result.push(arrData[i].name);
+                this.result.push(arrData[i].name);
             }
             else {
                 if(arrData[i].name.indexOf(src) >= 0) {
-                    result.push(arrData[i].name);
+                    this.result.push(arrData[i].name);
                     if(arrData[i].hasOwnProperty('children')) {
                         this.filterTree(arrData[i].children, '');
                     }
@@ -30,8 +31,9 @@ window.SearchTree.treeModel = Backbone.Model.extend({
                 }
             }
         }
-        console.log(result);
+        //console.log(this.result);
        // return result;
+        window.SearchTree.instantiatedTreeView.render(this.result);
     }
 });
 

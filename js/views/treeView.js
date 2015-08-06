@@ -11,9 +11,11 @@ window.SearchTree.treeView = Backbone.View.extend({
 
     initialize: function() {
         this.listenTo(this.model, 'change', this.render());
+       // this.$el.html(JSON.stringify(this.model.get('data')))
     },
 
-    render: function() {
-        this.$el.html(JSON.stringify(this.model.get('data')));
+    render: function(params) {
+        this.$el.html(JSON.stringify(params));
     }
 });
+
