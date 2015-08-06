@@ -31,8 +31,6 @@ window.SearchTree.treeModel = Backbone.Model.extend({
                 }
             }
         }
-        //console.log(this.result);
-       // return result;
         window.SearchTree.instantiatedTreeView.render(this.result);
     }
 });
