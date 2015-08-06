@@ -16,40 +16,23 @@ window.SearchTree.treeView = Backbone.View.extend({
 
     render: function(params) {
         this.$el.html(JSON.stringify(params));
-       // this.$el.html(this.view(params, this.el));
+        // this.$el.html(this.view(params, this.el));
     },
 
-    view: function (pa, parent){
-        console.log(pa);
+    view: function (arr, parent){
+        console.log(arr);
         var container = $('<ul></ul>');
-        for(var j = 0; j< pa.length; j++) {
-            var entry = pa[j];
+        for(var j = 0; j< arr.length; j++) {
+            var entry = arr[j];
             var li = $('<li></li>');
-            //li.className;
+            li.addClass('mdi mdi-file-outline');
             li.name = entry.name;
             container.appendChild(li);
             if(entry.hasOwnProperty('children')) {
                 this.view(entry.children, li);
-                //li.className =
+                li.addClass('mdi mdi-folder');
             }
         }
         parent.appendChild(container);
     }
 });
-
-//
-//SearchTree.CreateTree = function(data, parent){
-//    var container = document.createElement('ul');
-//    for(var i=0; i < data.length; i++) {
-//        var entry = data[i];
-//        var li = document.createElement('li');
-//        li.innerHTML = entry.name;
-//        li.className = SearchTree.constants.classes.fileIcon;
-//        container.appendChild(li);
-//        if (entry.hasOwnProperty('children')) {
-//            SearchTree.CreateTree(entry.children, li);
-//            li.className = SearchTree.constants.classes.folderIcon;
-//        }
-//    }
-//    parent.appendChild(container);
-//}

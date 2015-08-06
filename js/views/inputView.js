@@ -15,7 +15,7 @@ window.SearchTree.inputView = Backbone.View.extend({
 
     update: function(){
         var field = $('#search-field').val();
-        if (field === ''){
+        if (!field){
             window.SearchTree.instantiatedTreeModel.filterTree(this.dataView, '');
         }
         else {
