@@ -15,12 +15,15 @@ window.SearchTree.treeView = Backbone.View.extend({
     },
 
     render: function(params) {
-        this.$el.html(JSON.stringify(params));
-        // this.$el.html(this.view(params, this.el));
+        //this.$el.html(JSON.stringify(params));
+        //this.$el.html(
+        var show = params;
+        console.log(show);
+        this.view(show, this.el);
     },
 
     view: function (arr, parent){
-        console.log(arr);
+       // console.log(arr);
         var container = $('<ul></ul>');
         for(var j = 0; j< arr.length; j++) {
             var entry = arr[j];
