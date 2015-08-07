@@ -15,11 +15,11 @@ window.SearchTree.treeModel = Backbone.Model.extend({
         for (var i =0; i< arrData.length; i++) {
             //var item = arrData[i];
             if (arrData[i].type === 'file' && src === '') {
-                this.result.push(arrData[i]);
+                this.result.push(arrData[i].name);
             }
             else {
                 if(arrData[i].name.indexOf(src) >= 0) {
-                    this.result.push(arrData[i]);
+                    this.result.push(arrData[i].name);
                     if(arrData[i].hasOwnProperty('children')) {
                         this.filterTree(arrData[i].children, '');
                     }

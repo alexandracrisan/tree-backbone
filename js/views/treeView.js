@@ -9,33 +9,62 @@ window.SearchTree.treeView = Backbone.View.extend({
     events: {
     },
 
+    templates: {
+        list: _.template(
+            '<ul>' +
+            '<% _.each(params, function (item) { %>' +
+            '<li><%= item %></li>' +
+            '<% }) %>' +
+            '</ul>'
+        )
+    },
+
     initialize: function() {
         this.listenTo(this.model, 'change', this.render());
-       // this.$el.html(JSON.stringify(this.model.get('data')))
     },
 
     render: function(params) {
-        //this.$el.html(JSON.stringify(params));
-        //this.$el.html(
-        var show = params;
-        console.log(show);
-        this.view(show, this.el);
-    },
-
-    view: function (arr, parent){
-       // console.log(arr);
-        var container = $('<ul></ul>');
-        for(var j = 0; j< arr.length; j++) {
-            var entry = arr[j];
-            var li = $('<li></li>');
-            li.addClass('mdi mdi-file-outline');
-            li.name = entry.name;
-            container.appendChild(li);
-            if(entry.hasOwnProperty('children')) {
-                this.view(entry.children, li);
-                li.addClass('mdi mdi-folder');
-            }
-        }
-        parent.appendChild(container);
+        // this.$el.html(JSON.stringify(params));
+        this.$el.html(this.templates.list({
+                params: params
+            })
+        );
     }
 });
+
+
+//
+//window.SearchTree.treeView = Backbone.View.extend({
+//    el:'#tree',
+//
+//    events: {
+//    },
+//
+//    initialize: function() {
+//        this.listenTo(this.model, 'change', this.render());
+//       // this.$el.html(JSON.stringify(this.model.get('data')))
+//    },
+//
+//    render: function(params) {
+//        this.$el.html(JSON.stringify(params));
+//        //this.$el.html(
+//       // this.view(params, this.el);
+//    },
+//
+//    view: function (arr, parent){
+//       // console.log(arr);
+//        var container = $('<ul></ul>');
+//        for(var j = 0; j< arr.length; j++) {
+//            var entry = arr[j];
+//            var li = $('<li></li>');
+//            li.addClass('mdi mdi-file-outline');
+//            li.name = entry.name;
+//            container.appendChild(li);
+//            if(entry.hasOwnProperty('children')) {
+//                this.view(entry.children, li);
+//                li.addClass('mdi mdi-folder');
+//            }
+//        }
+//        parent.appendChild(container);
+//    }
+//});
