@@ -12,7 +12,7 @@ window.SearchTree.treeView = Backbone.View.extend({
     templates: {
         list: _.template(
             '<ul>' +
-            '<% _.each(params, function (item) { %>' +
+            '<% _.each(data, function (item) { %>' +
             '<li><%= item %></li>' +
             '<% }) %>' +
             '</ul>'
@@ -20,15 +20,17 @@ window.SearchTree.treeView = Backbone.View.extend({
     },
 
     initialize: function() {
-        this.listenTo(this.model, 'change', this.render());
+        this.model.on('change', this.handleModelChange, this);
     },
 
-    render: function(params) {
+    handleModelChange: function(data){
+        this.localData = data;
+        this.render();
+    },
+
+    render: function() {
         // this.$el.html(JSON.stringify(params));
-        this.$el.html(this.templates.list({
-                params: params
-            })
-        );
+        this.$el.html(this.templates.list({data: this.localData}));
     }
 });
 

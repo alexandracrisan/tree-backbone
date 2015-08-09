@@ -15,12 +15,7 @@ window.SearchTree.inputView = Backbone.View.extend({
 
     update: function(){
         var field = $('#search-field').val();
-        if (!field){
-            window.SearchTree.instantiatedTreeModel.filterTree(this.dataView, '');
-        }
-        else {
-            window.SearchTree.instantiatedTreeModel.filterTree(this.dataView, field);
-        }
+        window.SearchTree.instantiatedTreeModel.renderFilteredTree(this.dataView, field);
     }
 });
 

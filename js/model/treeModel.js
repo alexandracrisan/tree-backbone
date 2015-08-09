@@ -31,10 +31,19 @@ window.SearchTree.treeModel = Backbone.Model.extend({
                 }
             }
         }
-        window.SearchTree.instantiatedTreeView.render(this.result);
+    },
+
+    renderFilteredTree: function(data, src) {
+        this.filterTree(data, src);
+        //window.SearchTree.instantiatedTreeView.render(this.result);
+        this.trigger('change', this.result);
+        this.result = [];
+
     }
 });
 
 window.SearchTree.instantiatedTreeModel = new window.SearchTree.treeModel({
     data: window.SearchTree.fileData,
 });
+
+//_.extend(window.SearchTree.instantiatedTreeModel, Backbone.Events);
