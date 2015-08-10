@@ -7,15 +7,17 @@ window.SearchTree = window.SearchTree || {};
 window.SearchTree.inputView = Backbone.View.extend({
     el:'#search-field-container',
 
-    dataView: window.SearchTree.fileData,
-
     events: {
         'keyup #search-field': 'update'
     },
 
     update: function(){
-        var field = $('#search-field').val();
-        window.SearchTree.instantiatedTreeModel.renderFilteredTree(this.dataView, field);
+        var fieldValue = $('#search-field').val();
+        this.model.filterByValue(fieldValue);
+    },
+
+    render: function(){
+        this.$el.html('<input id="search-field" type="search" placeholder="folder name">')
     }
 });
 

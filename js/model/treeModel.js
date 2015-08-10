@@ -30,14 +30,10 @@ window.SearchTree.treeModel = Backbone.Model.extend({
         }
     },
 
-    renderFilteredTree: function(data, src) {
-        this.filterTree(data, src);
-        this.trigger('change', this.result);
+    filterByValue: function( src) {
+        this.filterTree(this.get('data'), src);
+        this.set('filteredData', this.result);
         this.result = [];
-        //window.SearchTree.instantiatedTreeView.render(this.result);
     }
 });
 
-window.SearchTree.instantiatedTreeModel = new window.SearchTree.treeModel({
-    data: window.SearchTree.fileData,
-});
