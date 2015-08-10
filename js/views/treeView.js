@@ -13,7 +13,14 @@ window.SearchTree.treeView = Backbone.View.extend({
         list: _.template(
             '<ul>' +
             '<% _.each(data, function (item) { %>' +
-            '<li><%= item %></li>' +
+             '<% if(item.hasOwnProperty("children")){ %>' +
+             //'<% .li.class="mdi mdi-folder" %>' +
+            '<li class="mdi mdi-folder"><%= item.name %></li>' +
+            //'<% this.templates.list({data: item.children}) %>' +
+            '<% } %>' +
+            //'<% else { %>' +
+            '<li class="mdi mdi-file-outline"><%= item.name %></li>' +
+            //'<% } %>' +
             '<% }) %>' +
             '</ul>'
         )
@@ -34,39 +41,23 @@ window.SearchTree.treeView = Backbone.View.extend({
     }
 });
 
-
+//<td><%= compensation %></td>
 //
-//window.SearchTree.treeView = Backbone.View.extend({
-//    el:'#tree',
-//
-//    events: {
-//    },
-//
-//    initialize: function() {
-//        this.listenTo(this.model, 'change', this.render());
-//       // this.$el.html(JSON.stringify(this.model.get('data')))
-//    },
-//
-//    render: function(params) {
-//        this.$el.html(JSON.stringify(params));
-//        //this.$el.html(
-//       // this.view(params, this.el);
-//    },
-//
-//    view: function (arr, parent){
-//       // console.log(arr);
-//        var container = $('<ul></ul>');
-//        for(var j = 0; j< arr.length; j++) {
-//            var entry = arr[j];
-//            var li = $('<li></li>');
-//            li.addClass('mdi mdi-file-outline');
-//            li.name = entry.name;
-//            container.appendChild(li);
-//            if(entry.hasOwnProperty('children')) {
-//                this.view(entry.children, li);
-//                li.addClass('mdi mdi-folder');
-//            }
+//SearchTree.CreateTree = function(data, parent){
+//    var container = document.createElement('ul');
+//    for(var i=0; i < data.length; i++) {
+//        var entry = data[i];
+//        var li = document.createElement('li');
+//        li.innerHTML = entry.name;
+//        li.className = SearchTree.constants.classes.fileIcon;
+//        container.appendChild(li);
+//        if (entry.hasOwnProperty('children')) {
+//            SearchTree.CreateTree(entry.children, li);
+//            li.className = SearchTree.constants.classes.folderIcon;
 //        }
-//        parent.appendChild(container);
 //    }
-//});
+//    parent.appendChild(container);
+//}
+//<% if (typeof(date) !== "undefined") { %>
+//<span class="date"><%= date %></span>
+//        <% } %>

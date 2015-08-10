@@ -8,18 +8,15 @@ window.SearchTree.treeModel = Backbone.Model.extend({
     result: [],
 
     filterTree: function(data, src){
-        //console.log(src);
         var arrData = data;
-        //console.log(arrData);
 
         for (var i =0; i< arrData.length; i++) {
-            //var item = arrData[i];
             if (arrData[i].type === 'file' && src === '') {
-                this.result.push(arrData[i].name);
+                this.result.push(arrData[i]);
             }
             else {
                 if(arrData[i].name.indexOf(src) >= 0) {
-                    this.result.push(arrData[i].name);
+                    this.result.push(arrData[i]);
                     if(arrData[i].hasOwnProperty('children')) {
                         this.filterTree(arrData[i].children, '');
                     }
@@ -35,15 +32,12 @@ window.SearchTree.treeModel = Backbone.Model.extend({
 
     renderFilteredTree: function(data, src) {
         this.filterTree(data, src);
-        //window.SearchTree.instantiatedTreeView.render(this.result);
         this.trigger('change', this.result);
         this.result = [];
-
+        //window.SearchTree.instantiatedTreeView.render(this.result);
     }
 });
 
 window.SearchTree.instantiatedTreeModel = new window.SearchTree.treeModel({
     data: window.SearchTree.fileData,
 });
-
-//_.extend(window.SearchTree.instantiatedTreeModel, Backbone.Events);
