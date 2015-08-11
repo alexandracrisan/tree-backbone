@@ -10,23 +10,17 @@ window.SearchTree.treeModel = Backbone.Model.extend({
     filterTree: function(data, src){
         var arrData = data;
 
-        for (var i =0; i< arrData.length; i++) {
-            if (arrData[i].type === 'file' && src === '') {
+        for (var i = 0; i < arrData.length; i++) {
+
+            if (arrData[i].name.indexOf(src) >= 0) {
                 this.result.push(arrData[i]);
             }
             else {
-                if(arrData[i].name.indexOf(src) >= 0) {
-                    this.result.push(arrData[i]);
-                    if(arrData[i].hasOwnProperty('children')) {
-                        this.filterTree(arrData[i].children, '');
-                    }
-                }
-                else {
-                    if (arrData[i].hasOwnProperty('children')) {
-                        this.filterTree(arrData[i].children, src);
-                    }
+                if (arrData[i].hasOwnProperty('children')) {
+                    this.filterTree(arrData[i].children, src);
                 }
             }
+
         }
     },
 
@@ -36,4 +30,5 @@ window.SearchTree.treeModel = Backbone.Model.extend({
         this.result = [];
     }
 });
+
 

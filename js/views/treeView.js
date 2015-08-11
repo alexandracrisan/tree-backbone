@@ -9,21 +9,21 @@ window.SearchTree.treeView = Backbone.View.extend({
     events: {
     },
 
-    templates: {
-        list: _.template(
-            '<ul>' +
-            '<% _.each(data, function (item) { %>' +
-            //'<li><% (item.hasOwnProperty("children")) ? class="mdi mdi-folder"<%= item.name %> : class="mdi mdi-file-outline"<%= item.name %> %></li>'+
-            '<% if(item.hasOwnProperty("children")){ %>' +
-            '<li class="mdi mdi-folder"><%= item.name %></li>' +
-            '<% } %>' +
-            //'<% this.templates.list({data: item.children}) %>' +
-            '<% if(!item.hasOwnProperty("children")){ %>' +
-            '<li class="mdi mdi-file-outline"><%= item.name %></li>' +
-            '<% } %>' +
-            '<% }) %>' +
-            '</ul>'
-        )
+    list: function(data,parent){
+
+         var container = $('<ul></ul>');
+         for (var  i = 0; i< data.length; i++){
+             var entry = data[i];
+             var li = $('<li></li>');
+             li.text(entry.name);
+             li.addClass('mdi mdi-file-outline');
+             container.append(li);
+             if(entry.hasOwnProperty('children')) {
+                 li.addClass('mdi mdi-folder');
+                 this.list(entry.children, li);
+             }
+         }
+         parent.append(container);
     },
 
     initialize: function() {
@@ -31,9 +31,10 @@ window.SearchTree.treeView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html(this.templates.list({ data: this.model.get('filteredData') }));
-        console.log(this.model.get('data'));
-        console.log(this.model.get('filteredData'));
+        //this.$el.html(this.templates.list({ data: this.model.get('filteredData') }));
+        this.$el.empty();
+        this.$el.html(this.list(this.model.get('filteredData'), this.$el));
     }
 });
+
 
