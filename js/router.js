@@ -16,10 +16,14 @@ window.SearchTree.router =  Backbone.Router.extend({
 
     home: function(){
         console.log('home');
+        var viewHome = new window.SearchTree.mainView();
+        viewHome.render();
     },
 
     test: function(){
         console.log('testpage');
+        var viewTest = new window.SearchTree.testView();
+        viewTest.render();
     }
 
 });

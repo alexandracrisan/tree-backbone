@@ -31,7 +31,6 @@ window.SearchTree.treeView = Backbone.View.extend({
     },
 
     render: function() {
-        //this.$el.html(this.templates.list({ data: this.model.get('filteredData') }));
         this.$el.empty();
         this.$el.html(this.list(this.model.get('filteredData'), this.$el));
     }
