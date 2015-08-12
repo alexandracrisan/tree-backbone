@@ -5,7 +5,11 @@
 window.SearchTree = window.SearchTree || {};
 
 window.SearchTree.testView = Backbone.View.extend({
-    el: 'body',
+    el: '.container',
+
+    initialize: function(){
+
+    },
 
     render: function() {
         this.$el.html('<h1>Welcome to my test page</h1>');

@@ -9,6 +9,8 @@ window.SearchTree.app =
         });
 
         window.SearchTree.instantiatedRoutes = new window.SearchTree.router();
+        var links = new window.SearchTree.linksView();
+        links.render();
     });
 
 

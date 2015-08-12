@@ -4,9 +4,15 @@
 window.SearchTree = window.SearchTree || {};
 
 window.SearchTree.mainView = Backbone.View.extend({
-    el: 'container',
+    el: '.container',
 
     initialize: function(){
+
+    },
+
+    render: function(){
+        this.$el.html('<div id="search-field-container"></div><div id="tree"></div>');
+
         this.input =  new window.SearchTree.inputView({
             model: window.SearchTree.instantiatedTreeModel
         });
@@ -14,11 +20,7 @@ window.SearchTree.mainView = Backbone.View.extend({
         this.instantiatedTreeView = new window.SearchTree.treeView({
             model: window.SearchTree.instantiatedTreeModel
         });
-    },
 
-    render: function(){
-        //this.$el.empty();
-        this.$el.append(this.input.$el, this.instantiatedTreeView.$el);
         this.input.render();
         this.instantiatedTreeView.render();
     }
